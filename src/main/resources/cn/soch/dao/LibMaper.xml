@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.soch.dao.LibMaper">
+    <select id="listLibAll" resultType="cn.soch.pojo.Lib">
+        SELECT id,question,answer,uId,attachId FROM t_lib
+    </select>
+    <select id="listLib" parameterType="String" resultType="cn.soch.pojo.Lib">
+        SELECT id,question,answer,uId,attachId FROM t_lib WHERE question like '%${_parameter}%'
+    </select>
+    <insert id="insertLib" parameterType="cn.soch.pojo.Lib">
+        INSERT INTO t_lib(id,question,answer,uId,attachId)
+        VALUES(#{id},#{question},#{answer},#{uId},#{attachId})
+    </insert>
+    <delete id="deleteLibById" parameterType="int">
+        DELETE FROM t_lib WHERE id=#{id}
+    </delete>
+    <update id="updateLib" parameterType="cn.soch.pojo.Lib">
+        UPDATE t_lib SET
+        id=#{id},question=#{question},answer=#{answer},uId=#{uId},attachId=#{attachId}
+        WHERE id=#{id}
+    </update>
+    <select id="getLibById" parameterType="int"
+            resultType="cn.soch.pojo.Lib">
+        SELECT id,question,question,uId,attachId FROM t_lib WHERE id=#{id}
+    </select>
+
+</mapper>
